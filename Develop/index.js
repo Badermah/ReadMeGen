@@ -2,6 +2,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 // TODO: Create an array of questions for user input
+function init() {
 inquirer
   .prompt([
     {
@@ -59,13 +60,60 @@ inquirer
       'ISC': '[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)',
       'None': '',
     };
-  });
+ 
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
-function init() {}
+function writeToFile(fileName, data) {
+  fs.writeFile(fileName, data, (err) =>
+    err ? console.error(err) : console.log(`${fileName} generated successfully!`)
+  );
+}
 
 // Function call to initialize app
+const readme = `# ${response.title}
+
+${badge[response.license]}
+
+## Description
+
+${response.description}
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [Questions](#questions)
+
+## Installation
+
+${response.installation}
+
+## Usage
+
+${response.usage}
+
+## License
+
+This project is covered under the ${response.license} License.
+
+## Contributing
+
+${response.contributing}
+
+## Tests
+
+${response.tests}
+
+## Questions
+
+For any questions, please feel free to reach out to me at ${response.email} or check out my GitHub profile [${response.github}](https://github.com/${response.github}).
+`;
+
+      writeToFile('README.md', readme);
+    });
+}
+
 init();
